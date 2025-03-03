@@ -1,10 +1,8 @@
 import moduller.oyunlar
 import moduller.hesapmenu
-from moduller.oyunlar import *
-# import moduller.hesapmenu as hm
-#from moduller.hesapmenu import hmmenu
-from moduller.hesapmenu import * # tüm fonksiyonlar.
+from moduller.hesapmenu import hmmenu
 import oyunlarklasoru.yilanoyunu
+
 
 def anamenu():
     print("\033[1;32;40m")
@@ -37,4 +35,5 @@ def anamenu():
 # print(dir(moduller.oyunlar)) 
 #print(dir(moduller.hesapmenu)) # modüllerin içindeki fonksiyonlar.
 #help(moduller.hesapmenu.hmmenu
+
 anamenu()
