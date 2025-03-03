@@ -2,135 +2,138 @@ import pygame
 import time
 import random
 
+pygame.init() 
+
 def yilanOyna():
+   # Pygame'i başlat
     
 
-    # Pygame'i başlat
-    pygame.init()
-
-    # Oyun ekranı boyutları
+    # Renkler
     beyaz = (255, 255, 255)
     siyah = (0, 0, 0)
     kirmizi = (213, 50, 80)
     yesil = (0, 255, 0)
     mavi = (50, 153, 213)
 
-    dis_w = 600
-    dis_h = 400
+    # Ekran boyutları
+    genislik = 600
+    yukseklik = 400
 
-    dis = pygame.display.set_mode((dis_w, dis_h))
+    # Ekranı oluştur
+    dislay = pygame.display.set_mode((genislik, yukseklik))
     pygame.display.set_caption('Yılan Oyunu')
 
-    # Saat ve yazı fontları
+    # FPS kontrolü
     clock = pygame.time.Clock()
-    snake_block = 10
-    snake_speed = 15
+    yilan_hiz = 15
 
+    # Yılan özellikleri
+    yilan_boyutu = 10
+    yilan_hizi = 15
+
+    # Yazı fontu
     font_style = pygame.font.SysFont("bahnschrift", 25)
-    score_font = pygame.font.SysFont("comicsansms", 35)
+    puan_fontu = pygame.font.SysFont("comicsansms", 35)
 
-    # Puan gösterimi
-    def your_score(score):
-        value = score_font.render("Puan: " + str(score), True, siyah)
-        dis.blit(value, [0, 0])
+    # Puanı ekrana yazdıran fonksiyon
+    def puan(puan):
+        value = puan_fontu.render("Puan: " + str(puan), True, siyah)
+        dislay.blit(value, [0, 0])
 
-    # Yılanın başını çizme
-    def our_snake(snake_block, snake_list):
-        for x in snake_list:
-            pygame.draw.rect(dis, yesil, [x[0], x[1], snake_block, snake_block])
+    # Yılanın kendisini çizdiği fonksiyon
+    def yilan(yilan_boyutu, yilan_listesi):
+        for x in yilan_listesi:
+            pygame.draw.rect(dislay, yesil, [x[0], x[1], yilan_boyutu, yilan_boyutu])
 
-    # Mesaj yazdırma
-    def message(msg, color):
-        mesg = font_style.render(msg, True, color)
-        dis.blit(mesg, [dis_w / 6, dis_h / 3])
+    # Ana oyun döngüsü
+    def oyun():
+        oyun_bitti = False
+        oyun_kapanma = False
 
-    # Ana oyun fonksiyonu
-    def gameLoop():
-        game_over = False
-        game_close = False
+        # Yılan başlangıç pozisyonu
+        x1 = genislik / 2
+        y1 = yukseklik / 2
 
-        # Yılanın başlangıç pozisyonu
-        x1 = dis_w / 2
-        y1 = dis_h / 2
+        # Yılanın hareket ettiği hız
+        x1_hareket = 0
+        y1_hareket = 0
 
-        # Yılanın hareketi
-        x1_change = 0
-        y1_change = 0
+        # Yılanın vücut parçaları
+        yilan_listesi = []
+        uzunluk = 1
 
-        # Yılanın gövde kısmı
-        snake_List = []
-        Length_of_snake = 1
+        # Yiyeceğin başlangıç pozisyonu
+        yemek_x = round(random.randrange(0, genislik - yilan_boyutu) / 10.0) * 10.0
+        yemek_y = round(random.randrange(0, yukseklik - yilan_boyutu) / 10.0) * 10.0
 
-        # Yem pozisyonu
-        foodx = round(random.randrange(0, dis_w - snake_block) / 10.0) * 10.0
-        foody = round(random.randrange(0, dis_h - snake_block) / 10.0) * 10.0
+        while not oyun_bitti:
 
-        while not game_over:
-
-            while game_close:
-                dis.fill(mavi)
-                message("Kaybettin! Q-Quit veya C-Oynat tekrar", kirmizi)
-                your_score(Length_of_snake - 1)
+            while oyun_kapanma:
+                dislay.fill(mavi)
+                mesaj = font_style.render("Oyun bitti! C-Devam, Q-Çıkış", True, kirmizi)
+                dislay.blit(mesaj, [genislik / 6, yukseklik / 3])
+                puan(uzunluk - 1)
                 pygame.display.update()
 
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_q:
-                            game_over = True
-                            game_close = False
+                            oyun_bitti = True
+                            oyun_kapanma = False
                         if event.key == pygame.K_c:
-                            gameLoop()
-
+                            oyun()
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    game_over = True
+                    oyun_bitti = True
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        x1_change = -snake_block
-                        y1_change = 0
+                        x1_hareket = -yilan_boyutu
+                        y1_hareket = 0
                     elif event.key == pygame.K_RIGHT:
-                        x1_change = snake_block
-                        y1_change = 0
+                        x1_hareket = yilan_boyutu
+                        y1_hareket = 0
                     elif event.key == pygame.K_UP:
-                        y1_change = -snake_block
-                        x1_change = 0
+                        y1_hareket = -yilan_boyutu
+                        x1_hareket = 0
                     elif event.key == pygame.K_DOWN:
-                        y1_change = snake_block
-                        x1_change = 0
+                        y1_hareket = yilan_boyutu
+                        x1_hareket = 0
 
-            # Yılanın ekran dışında çıkmaması için kontrol
-            if x1 >= dis_w or x1 < 0 or y1 >= dis_h or y1 < 0:
-                game_close = True
-            x1 += x1_change
-            y1 += y1_change
-            dis.fill(mavi)
-            pygame.draw.rect(dis, siyah, [foodx, foody, snake_block, snake_block])
-            snake_Head = []
-            snake_Head.append(x1)
-            snake_Head.append(y1)
-            snake_List.append(snake_Head)
-            if len(snake_List) > Length_of_snake:
-                del snake_List[0]
+            # Yılan ekran dışına çıkarsa oyun bitsin
+            if x1 >= genislik or x1 < 0 or y1 >= yukseklik or y1 < 0:
+                oyun_kapanma = True
+            
+            x1 += x1_hareket
+            y1 += y1_hareket
+            dislay.fill(mavi)
+            pygame.draw.rect(dislay, siyah, [yemek_x, yemek_y, yilan_boyutu, yilan_boyutu])
+            yilan_basi = []
+            yilan_basi.append(x1)
+            yilan_basi.append(y1)
+            yilan_listesi.append(yilan_basi)
+            if len(yilan_listesi) > uzunluk:
+                del yilan_listesi[0]
 
-            for x in snake_List[:-1]:
-                if x == snake_Head:
-                    game_close = True
+            for x in yilan_listesi[:-1]:
+                if x == yilan_basi:
+                    oyun_kapanma = True
 
-            our_snake(snake_block, snake_List)
-            your_score(Length_of_snake - 1)
+            yilan(yilan_boyutu, yilan_listesi)
+            puan(uzunluk - 1)
 
             pygame.display.update()
 
-            # Yılan yemeği yediğinde
-            if x1 == foodx and y1 == foody:
-                foodx = round(random.randrange(0, dis_w - snake_block) / 10.0) * 10.0
-                foody = round(random.randrange(0, dis_h - snake_block) / 10.0) * 10.0
-                Length_of_snake += 1
+            # Yılan yiyeceği yediğinde yeni yiyecek oluştur
+            if x1 == yemek_x and y1 == yemek_y:
+                yemek_x = round(random.randrange(0, genislik - yilan_boyutu) / 10.0) * 10.0
+                yemek_y = round(random.randrange(0, yukseklik - yilan_boyutu) / 10.0) * 10.0
+                uzunluk += 1
 
-            clock.tick(snake_speed)
+            clock.tick(yilan_hiz)
 
         pygame.quit()
         quit()
 
     # Oyunu başlat
-    gameLoop()
+    oyun()
