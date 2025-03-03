@@ -1,7 +1,7 @@
 import random
 import pygame # type: ignore
 import time
-import random
+
 
 def oyunmenu():
     while True:
