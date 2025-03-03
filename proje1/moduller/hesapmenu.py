@@ -3,6 +3,21 @@ def hmmenu():
        Hesap makinesi menüsü ...222
     """
 
+    def toplama(a,b):
+        return a+b
+
+    def carpm(a,b):
+        return a*b
+
+    def cıkar(a,b):
+        return a-b
+
+    def bol(a,b):
+        return a/b
+
+    def ustal(x,y):
+        return x**y
+
     # Hesap makinesi menüsü ...
 
     print("\033[1;32;40m")
@@ -30,19 +45,6 @@ def hmmenu():
     #if secim =="6": vektorel_app.anamenu()
     else: print("yanlış seçim yaptınız")
 
-    def toplama(a,b):
-        return a+b
-
-    def carpm(a,b):
-        return a*b
-
-    def cıkar(a,b):
-        return a-b
-
-    def bol(a,b):
-        return a/b
-
-    def ustal(x,y):
-        return x**y
+    
 
 

@@ -1,6 +1,7 @@
 import moduller.oyunlar
 import moduller.hesapmenu
 from moduller.hesapmenu import hmmenu
+import moduller.sekil
 import oyunlarklasoru.yilanoyunu
 
 
@@ -29,6 +30,7 @@ def anamenu():
     # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
     # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
     if secim == "2" : moduller.hesapmenu.hmmenu()
+    if secim == "3" : moduller.sekil.sekilciz()
     if secim == "9" : exit()
     else : anamenu()
 
