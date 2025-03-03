@@ -61,4 +61,3 @@ def hmenu():
         else:
             print("Geçersiz seçim, lütfen tekrar deneyin.")
 
-hmenu()

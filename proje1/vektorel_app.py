@@ -1,5 +1,5 @@
-import hesapla.hesapmenu
-import oyunlar.oyun
+import moduller.hesapmenu
+import moduller.oyun
 # import doviz.doviz_uygulamasi
 
 def anamenu():
@@ -20,9 +20,10 @@ def anamenu():
     print("╚═══════════════════════╝")
     secim = input()
     if secim == "1":
-        hesapla.hesapmenu.hmenu()
+        moduller.hesapmenu.hmenu()
     elif secim == "2":
-        oyunlar.oyun.oyunmenu()
+        moduller.oyun.oyunmenu()
+    
     #elif secim == "3":
    #     alnhesaplama.alan_hesaplama.alan_hesapla()
     #elif secim == "4":
@@ -38,7 +39,7 @@ def anamenu():
     #    return
     else:
         print("Geçersiz seçim, lütfen tekrar deneyin.")
-    anamenu()
+    
 
 anamenu()
 # ...
