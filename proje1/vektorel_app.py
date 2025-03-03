@@ -1,42 +1,44 @@
-import moduller.oyunlar
-import moduller.hesapmenu
-import moduller.sekil
-from moduller.hesapmenu import hmmenu
-import moduller.sekil
-import oyunlarklasoru.yilanoyunu
-
+import hesapla.hesapmenu
+import oyunlar.oyun
+# import doviz.doviz_uygulamasi
 
 def anamenu():
-    print("\033[1;32;40m")
-    #print("╔"+"═"*20+"╗")
-    print("╔═════════════════════╗")
-    print("║\033[1;31;40m   VEKTOREL APP    \033[1;32;40m  ║")
-    print("║                     ║")
-    print("║  1-Oyunlar          ║")
-    print("║  2-Hesap mak.       ║")
-    print("║  3-Şekil Çizdirme   ║")
-    print("║  4-Takvim           ║")
-    print("║  5-Çarpım Tablosu   ║")
-    print("║  6-Ritmik Sayma     ║")
-    print("║  7-Not Hesaplama    ║")
-    print("║  8-İdeal Kilo Hesap ║")
-    print("║  9-Döviz Uygulaması ║")
-    print("║  10-Sıcaklık Çevir  ║")
-    print("║  11-Çıkış           ║")
-    print("║                     ║")
-    print("║    Seçimiz nedir?   ║")
-    print("╚═════════════════════╝")
+    
+    print("╔═══════════════════════╗")
+    print("║     Uygulamalar       ║")
+    print("║                       ║")
+    print("║  1-Hesap makinesi     ║")
+    print("║  2-Oyunlar            ║")
+    print("║  3-Alan Hesaplama     ║")
+    print("║  4-Not Hesaplama      ║")
+    print("║  5-Çarpım Tablosu     ║")
+    print("║  6-Takvim             ║")
+    print("║  7-Döviz Kurları      ║")
+    print("║  8-Çıkış              ║")
+    print("║                       ║")
+    print("║    Seçimiz nedir?     ║")
+    print("╚═══════════════════════╝")
     secim = input()
-    if secim == "1" : moduller.oyunlar.oyunmenu()
-    # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
-    # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
-    if secim == "2" : moduller.hesapmenu.hmmenu()
-    if secim == "3" : moduller.sekil.sekilmenu()
-    if secim == "9" : exit()
-    else : anamenu()
-
-# print(dir(moduller.oyunlar)) 
-#print(dir(moduller.hesapmenu)) # modüllerin içindeki fonksiyonlar.
-#help(moduller.hesapmenu.hmmenu
+    if secim == "1":
+        hesapla.hesapmenu.hmenu()
+    elif secim == "2":
+        oyunlar.oyun.oyunmenu()
+    #elif secim == "3":
+   #     alnhesaplama.alan_hesaplama.alan_hesapla()
+    #elif secim == "4":
+    #    nothesaplamamnu.nothp.not_hesapla()
+    #elif secim == "5":
+     #   carpımtb.carpim_tablosu.carpim_tablosu()
+    #elif secim == "6":
+     #   takvim.takvim_uygulamasi.takvim_goster()
+    #elif secim == "7":
+      #  doviz.doviz_uygulamasi.doviz_goster()
+    #elif secim == "8":
+     #   print("Çıkış yapılıyor...")
+    #    return
+    else:
+        print("Geçersiz seçim, lütfen tekrar deneyin.")
+    anamenu()
 
 anamenu()
+# ...
