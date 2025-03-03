@@ -30,7 +30,7 @@ def anamenu():
     if secim == "1" : moduller.oyunlar.oyunmenu()
     # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
     # if secim == "2" : moduller.hesapmenu.hmmenu() # import moduller.hesammakinesi şeklinde kullanım için idi.
-    if secim == "2" : hmmenu()
+    if secim == "2" : moduller.hesapmenu.hmmenu()
     if secim == "9" : exit()
     else : anamenu()
 
